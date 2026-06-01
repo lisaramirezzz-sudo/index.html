@@ -3,125 +3,193 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I'm Sorry, Love 🐱💙</title>
+<title>I'm Sorry, Love 💙</title>
 
 <style>
-*{
+body{
     margin:0;
     padding:0;
-    box-sizing:border-box;
-}
-
-body{
     overflow:hidden;
-    height:100vh;
+    font-family:'Comic Sans MS', cursive;
+    background:linear-gradient(135deg,#cce7ff,#ffe6f2);
     display:flex;
     justify-content:center;
     align-items:center;
-    background:linear-gradient(135deg,#4facfe,#00c6ff);
-    font-family:'Comic Sans MS', cursive, sans-serif;
+    height:100vh;
 }
 
 .container{
-    background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(10px);
-    padding:40px;
-    border-radius:30px;
+    background:rgba(255,255,255,0.95);
+    padding:30px;
+    border-radius:25px;
     text-align:center;
-    color:white;
-    width:90%;
+    width:85%;
     max-width:700px;
-    box-shadow:0 0 30px rgba(255,255,255,0.3);
+    box-shadow:0 0 20px rgba(0,0,0,0.2);
     z-index:10;
 }
 
 h1{
-    font-size:2.5rem;
-    margin-bottom:20px;
-    animation:pulse 2s infinite;
+    color:#4da6ff;
 }
 
 p{
-    font-size:1.3rem;
-    margin:15px 0;
-    line-height:1.6;
+    font-size:20px;
+    line-height:1.8;
+    color:#444;
 }
 
-.question{
-    font-size:2rem;
-    margin-top:25px;
-    font-weight:bold;
-    animation:pulse 1.5s infinite;
+button{
+    padding:12px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    margin:10px;
+    transition:0.3s;
 }
 
-@keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.05);}
-    100%{transform:scale(1);}
+.yes{
+    background:#66b3ff;
+    color:white;
 }
 
-/* Falling Hearts */
+.yes:hover{
+    transform:scale(1.1);
+}
+
+.no{
+    background:#ff99c8;
+    color:white;
+    position:relative;
+}
+
+.no:hover{
+    position:absolute;
+    left:calc(10% + (80 * Math.random()));
+}
+
 .heart{
     position:absolute;
-    top:-50px;
-    color:#ffffff;
-    font-size:25px;
-    animation:fall linear infinite;
-    opacity:0.8;
+    color:#ff6fa5;
+    font-size:24px;
+    animation:float 8s linear infinite;
 }
 
-@keyframes fall{
+@keyframes float{
     0%{
-        transform:translateY(-50px) rotate(0deg);
+        transform:translateY(100vh);
+        opacity:0;
+    }
+    10%{
         opacity:1;
     }
     100%{
-        transform:translateY(110vh) rotate(360deg);
+        transform:translateY(-120px);
         opacity:0;
     }
+}
+
+#surprise{
+    display:none;
+    margin-top:20px;
+    animation:pop 1s ease;
+}
+
+@keyframes pop{
+    from{
+        transform:scale(0);
+    }
+    to{
+        transform:scale(1);
+    }
+}
+
+.kitty{
+    font-size:80px;
+}
+
+.message{
+    font-size:28px;
+    color:#4da6ff;
+    font-weight:bold;
 }
 </style>
 </head>
 <body>
 
+<div id="hearts"></div>
+
 <div class="container">
-    <h1>I'm Sorry, Love 🐱💙</h1>
+    <h1>🐱💙 I'm Sorry, Love 💙🐱</h1>
 
-    <p>🐱 I know I hurt you, and I'm truly sorry. 🥺💙</p>
+    <p>
+    🐱 I know I hurt you, and I'm truly sorry. 🥺💙<br><br>
 
-    <p>🌸🐱 You mean so much to me and I never want to lose you. 💙🍓</p>
+    🌸🐱 You mean so much to me and I never want to lose you. 💙🍓<br><br>
 
-    <p>🐱💙 Every moment with you is special. 💙🐱</p>
+    🐱💙 Every moment with you is special. 💙🐱<br><br>
 
-    <p>🧁🍓🐱 I can't change the past, but I can promise to learn from my mistakes and be better. 🐱💙🌸</p>
+    🧁🍓🐱 I can't change the past, but I can promise to learn from my mistakes and be better. 🐱💙🌸<br><br>
 
-    <p>💙🐱🌸🍓🧁🐱💙</p>
+    💙🐱🌸🍓🧁🐱💙
+    </p>
 
-    <div class="question">
-        🥺🐱 Can you forgive me? 💙🐱
+    <h2>🥺🐱 Can you forgive me? 💙🐱</h2>
+
+    <button class="yes" onclick="showKitty()">Yes 💙</button>
+    <button class="no" id="noBtn">No 🙈</button>
+
+    <div id="surprise">
+        <div class="kitty">
+            🐱🎀 🐱🎀 🐱🎀
+        </div>
+
+        <div class="message">
+            YAY! 💙🐱<br>
+            Thank you for forgiving me! 🥺💙<br>
+            I love you so much 🌸🍓💙
+        </div>
+
+        <div style="font-size:60px;margin-top:15px;">
+            🐱🎀💙🐱🎀💙🐱🎀
+        </div>
     </div>
 </div>
 
 <script>
-function createHeart() {
+// Floating Hearts
+const heartsContainer = document.getElementById('hearts');
+
+function createHeart(){
     const heart = document.createElement('div');
     heart.classList.add('heart');
+    heart.innerHTML = ['💙','💖','💕','💗','💓'][Math.floor(Math.random()*5)];
+    heart.style.left = Math.random()*100 + 'vw';
+    heart.style.fontSize = (20 + Math.random()*30) + 'px';
+    heart.style.animationDuration = (5 + Math.random()*5) + 's';
+    heartsContainer.appendChild(heart);
 
-    const hearts = ['💙','💖','💙','💕','💙','💗'];
-    heart.innerHTML = hearts[Math.floor(Math.random()*hearts.length)];
-
-    heart.style.left = Math.random() * window.innerWidth + 'px';
-    heart.style.animationDuration = (Math.random()*4 + 4) + 's';
-    heart.style.fontSize = (Math.random()*20 + 20) + 'px';
-
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
+    setTimeout(()=>{
         heart.remove();
-    }, 8000);
+    },10000);
 }
 
-setInterval(createHeart, 250);
+setInterval(createHeart,250);
+
+// Yes Button
+function showKitty(){
+    document.getElementById('surprise').style.display='block';
+}
+
+// Moving No Button
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+    noBtn.style.position = "absolute";
+    noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
+    noBtn.style.top = Math.random() * (window.innerHeight - 60) + "px";
+});
 </script>
 
 </body>
