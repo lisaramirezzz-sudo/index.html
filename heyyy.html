@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm Sorry, Love 💙</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    font-family:'Comic Sans MS', cursive;
+    background:linear-gradient(135deg,#cce7ff,#ffe6f2);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    background:rgba(255,255,255,0.95);
+    padding:30px;
+    border-radius:25px;
+    text-align:center;
+    width:85%;
+    max-width:700px;
+    box-shadow:0 0 20px rgba(0,0,0,0.2);
+    z-index:10;
+}
+
+h1{
+    color:#4da6ff;
+}
+
+p{
+    font-size:20px;
+    line-height:1.8;
+    color:#444;
+}
+
+button{
+    padding:12px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    margin:10px;
+    transition:0.3s;
+}
+
+.yes{
+    background:#66b3ff;
+    color:white;
+}
+
+.yes:hover{
+    transform:scale(1.1);
+}
+
+.no{
+    background:#ff99c8;
+    color:white;
+    position:relative;
+}
+
+.no:hover{
+    position:absolute;
+    left:calc(10% + (80 * Math.random()));
+}
+
+.heart{
+    position:absolute;
+    color:#ff6fa5;
+    font-size:24px;
+    animation:float 8s linear infinite;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+    10%{
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-120px);
+        opacity:0;
+    }
+}
+
+#surprise{
+    display:none;
+    margin-top:20px;
+    animation:pop 1s ease;
+}
+
+@keyframes pop{
+    from{
+        transform:scale(0);
+    }
+    to{
+        transform:scale(1);
+    }
+}
+
+.kitty{
+    font-size:80px;
+}
+
+.message{
+    font-size:28px;
+    color:#4da6ff;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div id="hearts"></div>
+
+<div class="container">
+    <h1>🐱💙 I'm Sorry, Love 💙🐱</h1>
+
+    <p>
+    🐱 I know I hurt you, and I'm truly sorry. 🥺💙<br><br>
+
+    🌸🐱 You mean so much to me and I never want to lose you. 💙🍓<br><br>
+
+    🐱💙 Every moment with you is special. 💙🐱<br><br>
+
+    🧁🍓🐱 I can't change the past, but I can promise to learn from my mistakes and be better. 🐱💙🌸<br><br>
+
+    💙🐱🌸🍓🧁🐱💙
+    </p>
+
+    <h2>🥺🐱 Can you forgive me? 💙🐱</h2>
+
+    <button class="yes" onclick="showKitty()">Yes 💙</button>
+    <button class="no" id="noBtn">No 🙈</button>
+
+    <div id="surprise">
+        <div class="kitty">
+            🐱🎀 🐱🎀 🐱🎀
+        </div>
+
+        <div class="message">
+            YAY! 💙🐱<br>
+            Thank you for forgiving me! 🥺💙<br>
+            I love you so much 🌸🍓💙
+        </div>
+
+        <div style="font-size:60px;margin-top:15px;">
+            🐱🎀💙🐱🎀💙🐱🎀
+        </div>
+    </div>
+</div>
+
+<script>
+// Floating Hearts
+const heartsContainer = document.getElementById('hearts');
+
+function createHeart(){
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerHTML = ['💙','💖','💕','💗','💓'][Math.floor(Math.random()*5)];
+    heart.style.left = Math.random()*100 + 'vw';
+    heart.style.fontSize = (20 + Math.random()*30) + 'px';
+    heart.style.animationDuration = (5 + Math.random()*5) + 's';
+    heartsContainer.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },10000);
+}
+
+setInterval(createHeart,250);
+
+// Yes Button
+function showKitty(){
+    document.getElementById('surprise').style.display='block';
+}
+
+// Moving No Button
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+    noBtn.style.position = "absolute";
+    noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
+    noBtn.style.top = Math.random() * (window.innerHeight - 60) + "px";
+});
+</script>
+
+</body>
+</html>
